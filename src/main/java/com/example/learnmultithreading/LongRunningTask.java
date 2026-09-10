@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LongRunningTask implements Runnable{
 
-    private String cmd;
+    private final String cmd;
 
     public LongRunningTask(String cmd){
         this.cmd=cmd;
