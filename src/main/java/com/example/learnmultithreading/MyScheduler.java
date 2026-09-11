@@ -1,6 +1,7 @@
 package com.example.learnmultithreading;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,7 @@ public class MyScheduler {
 //
 //    }
 
-//    Exactly one of the 'cron', 'fixedDelay' or 'fixedRate' attributes is required
+//    Exactly one of the 'cron', 'fixedDelay' or 'fixedRate' attributes is required, using both will give error
 //    @Scheduled(fixedDelay = 1000) //delays the task for 1sec after the end of one execution, and start of the next
 //    void logYou(){
 //        log.info("Scheduler2 started ...{}",Thread.currentThread().getName());
@@ -38,17 +39,37 @@ public class MyScheduler {
 //
 //    }
 
-    @Scheduled(cron = "*/5 * * * * *")
-    void logCron(){
-        log.info("Scheduler cron started ...{}",Thread.currentThread().getName());
+    //using cron expression, below runs every 5 seconds, using */5 as the step-up, only 5 would've run it every minute at second 5
+//    @Scheduled(cron = "*/5 * * * * *")
+//    void logCron(){
+//        log.info("Scheduler cron started ...{}",Thread.currentThread().getName());
+//
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        log.info("Scheduler cron ended ...{}",Thread.currentThread().getName());
+//
+//    }
+
+
+    //now what if we want to execute tasks asynchronously
+    @Scheduled(fixedRate = 500)
+    @Async("jobExecutor") //we should use a custom Executor, else it keeps creating a new thread
+    void logAsyncScheduled(){
+        log.info("Scheduler async started ...{}",Thread.currentThread().getName());
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(8000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 
-        log.info("Scheduler cron ended ...{}",Thread.currentThread().getName());
+        log.info("Scheduler async ended ...{}",Thread.currentThread().getName());
 
     }
+
+
 }

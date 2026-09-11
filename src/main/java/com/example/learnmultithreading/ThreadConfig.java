@@ -9,6 +9,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 @Configuration
 public class ThreadConfig {
 
+    //TaskScheduler controls the @Scheduled execution
     @Bean
     @Primary
     public TaskScheduler taskScheduler(){
