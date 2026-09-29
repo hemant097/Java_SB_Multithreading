@@ -56,20 +56,20 @@ public class MyScheduler {
 
 
     //now what if we want to execute tasks asynchronously
-    @Scheduled(fixedRate = 500)
-    @Async("jobExecutor") //we should use a custom Executor, else it keeps creating a new thread
-    void logAsyncScheduled(){
-        log.info("Scheduler async started ...{}",Thread.currentThread().getName());
-
-        try {
-            Thread.sleep(8000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        log.info("Scheduler async ended ...{}",Thread.currentThread().getName());
-
-    }
+//    @Scheduled(fixedRate = 500)
+//    @Async("jobExecutor") //we should use a custom Executor, else it keeps creating a new thread
+//    void logAsyncScheduled(){
+//        log.info("Scheduler async started ...{}",Thread.currentThread().getName());
+//
+//        try {
+//            Thread.sleep(8000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        log.info("Scheduler async ended ...{}",Thread.currentThread().getName());
+//
+//    }
 
 
 }

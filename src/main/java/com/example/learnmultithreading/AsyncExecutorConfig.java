@@ -6,23 +6,22 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 
 @Configuration
 @EnableAsync
 @Slf4j
-public class AsyncConfig {
+public class AsyncExecutorConfig {
 
     @Bean("jobExecutor")
-    public Executor jobExecutor(){
+    public ThreadPoolTaskExecutor jobExecutor(){
 
         ThreadPoolTaskExecutor threadPoolExecutor = new ThreadPoolTaskExecutor();
         threadPoolExecutor.setCorePoolSize(4);
         threadPoolExecutor.setMaxPoolSize(10);
         threadPoolExecutor.setQueueCapacity(6);
-        threadPoolExecutor.setThreadNamePrefix("hemuThread-");
+        threadPoolExecutor.setThreadNamePrefix("hemuThread-Exec");
         threadPoolExecutor.setRejectedExecutionHandler(new RejectedExecutionHandler() {
             @Override
             public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
