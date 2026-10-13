@@ -22,7 +22,7 @@ public class StudentService {
             CompletableFuture<String> collegeFuture = infoService.getCollegeFuture();
             CompletableFuture<String> idFuture = infoService.getIdFuture();
 
-            CompletableFuture.allOf(nameFuture,collegeFuture,idFuture); //this waits for all the CFs to complete, and works in parallel
+            CompletableFuture.allOf(nameFuture,collegeFuture,idFuture).join(); //this waits for all the CFs to complete, and works in parallel
 
                 Student student = new Student(nameFuture.get(),
                         collegeFuture.get(),

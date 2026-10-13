@@ -18,7 +18,7 @@ public class StudentInfoService {
         return CompletableFuture.completedFuture("Hemant");
     }
 
-    @Async
+    @Async("jobExecutor") //now this will use the TaskExecutor bean named jobExecutor
     CompletableFuture<String> getCollegeFuture()throws InterruptedException {
         log.info("Getting the college CF ... {}",Thread.currentThread().getName());
         Thread.sleep(2500);
